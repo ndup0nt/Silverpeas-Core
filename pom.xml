@@ -243,4 +243,13 @@
     <installer_version>5.10-SNAPSHOT</installer_version>
   </properties>
 
+<distributionManagement>
+    <repository>
+      <id>oosphere-releases</id>
+      <name>Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/releases/</url>
+    </repository>
+</distributionManagement>
+
 </project>

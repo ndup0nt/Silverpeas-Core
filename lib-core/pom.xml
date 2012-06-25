@@ -4,11 +4,12 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>core</artifactId>
-    <version>5.9.3-SNAPSHOT</version>
+    <version>5.9.2</version>
   </parent>
 
   <groupId>com.silverpeas.core</groupId>
   <artifactId>lib-core</artifactId>
+  <version>5.9.2-msad-expire</version>
   <packaging>jar</packaging>
   <name>Lib Core - ${project.version}</name>
   <description>A module providing all the basic services of Silverpeas on which can rely the EJBs and the web parts.</description>
@@ -30,7 +31,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>test-core</artifactId>
-      <version>${project.version}</version>
+      <version>${parent.version}</version>
       <scope>test</scope>
       <type>jar</type>
     </dependency>
@@ -426,4 +427,12 @@
   <properties>
     <apacheds.version>1.5.7</apacheds.version>
   </properties>
+<distributionManagement>
+    <repository>
+      <id>oosphere-releases</id>
+      <name>Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/releases/</url>
+    </repository>
+</distributionManagement>
 </project>

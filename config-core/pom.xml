@@ -4,11 +4,12 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>core</artifactId>
-    <version>5.9.3-SNAPSHOT</version>
+    <version>5.9.2</version>
   </parent>
 
   <groupId>com.silverpeas.core</groupId>
   <artifactId>config-core</artifactId>
+  <version>5.9.2-msad-expire</version>
   <packaging>pom</packaging>
   <name>Configuration Core - ${project.version}</name>
   <description>A module to store all the configuration for the core services of Silverpeas.</description>
@@ -26,4 +27,14 @@
       </plugin>
     </plugins>
   </build>
+
+<distributionManagement>
+    <repository>
+      <id>oosphere-releases</id>
+      <name>Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/releases/</url>
+    </repository>
+</distributionManagement>
+
 </project>
