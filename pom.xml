@@ -42,11 +42,26 @@
   </description>
 
   <scm>
-    <connection>scm:git:git@github.com:Silverpeas/Silverpeas-Core.git</connection>
-    <developerConnection>scm:git:git@github.com:Silverpeas/Silverpeas-Core.git</developerConnection>
-    <url>http://github.com/Silverpeas/Silverpeas-Core</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:git@github.com:ndupont/Silverpeas-Core.git</connection>
+    <developerConnection>scm:git:git@github.com:ndupont/Silverpeas-Core.git</developerConnection>
+    <url>http://github.com/ndupont/Silverpeas-Core</url>
+    <tag>core-5.9.x-fix3576</tag>
   </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>oosphere-releases</id>
+      <name>Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>oosphere-snapshots</id>
+      <name>Snapshots Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <repositories>
     <repository>
