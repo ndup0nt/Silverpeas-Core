@@ -89,12 +89,16 @@ public class UserPriviledgeValidation {
    */
   public UserDetail validateUserAuthentication(final HttpServletRequest request) throws
           WebApplicationException {
-    UserDetail authenticatedUser;
+    UserDetail authenticatedUser = null;
     String sessionId = getUserSessionKey(request);
     if (isDefined(sessionId)) {
       authenticatedUser = validateUserSession(sessionId);
-    } else {
+    }
+    if(authenticatedUser == null) { //there is no valid opened session, try to authenticate user from request
       authenticatedUser = authenticateUser(request);
+    }
+    if(authenticatedUser == null){ //we could neither find a valid session nor authenticate user, let's return a 401 response
+      throw new WebApplicationException(Response.Status.UNAUTHORIZED);
     }
     return authenticatedUser;
   }
@@ -126,7 +130,7 @@ public class UserPriviledgeValidation {
   private String getUserSessionKey(final HttpServletRequest request) {
     String sessionId = request.getHeader(HTTP_SESSIONKEY);
     if (!isDefined(sessionId)) {
-      HttpSession httpSession = request.getSession();
+      HttpSession httpSession = request.getSession(false);
       if (httpSession != null) {
         sessionId = httpSession.getId();
       }
@@ -155,11 +159,11 @@ public class UserPriviledgeValidation {
       AdminController adminController = new AdminController(null);
       UserFull user = adminController.getUserFull(userId);
       if (user == null || !user.getPassword().equals(password)) {
-        throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        return null;
       }
       return user;
     } else {
-      throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+      return null;
     }
   }
 
@@ -180,7 +184,7 @@ public class UserPriviledgeValidation {
     SessionInfo sessionInfo = sessionManagement.getSessionInfo(sessionKey);
     if (sessionInfo == null) {
       if (!UserDetail.isAnonymousUserExist()) {
-        throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        return null;
       }
       return UserDetail.getAnonymousUser();
     }
