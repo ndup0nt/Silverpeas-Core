@@ -4,14 +4,30 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>core</artifactId>
-    <version>5.9.4-SNAPSHOT</version>
+    <version>5.9.3</version>
   </parent>
 
   <groupId>com.silverpeas.core</groupId>
   <artifactId>lib-core</artifactId>
   <packaging>jar</packaging>
+  <version>5.9.3.1-oosphere-SNAPSHOT</version>
   <name>Lib Core - ${project.version}</name>
   <description>A module providing all the basic services of Silverpeas on which can rely the EJBs and the web parts.</description>
+
+    <distributionManagement>
+        <repository>
+            <id>oosphere-releases</id>
+            <name>Repository OOsphere</name>
+            <layout>default</layout>
+            <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>oosphere-snapshots</id>
+            <name>Snapshots Repository OOsphere</name>
+            <layout>default</layout>
+            <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
   <dependencies>
     <dependency>
