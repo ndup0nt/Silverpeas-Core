@@ -4,12 +4,13 @@
   <parent>
     <groupId>com.silverpeas</groupId>
     <artifactId>core</artifactId>
-    <version>5.9.4-SNAPSHOT</version>
+    <version>5.9.3</version>
   </parent>
 
   <groupId>com.silverpeas.core</groupId>
   <artifactId>war-core</artifactId>
   <packaging>war</packaging>
+  <version>5.9.3.1-oosphere-SNAPSHOT</version>
   <name>Core Webapp - ${project.version}</name>
   <description>The Web GUI for the core elements of Silverpeas : Administration, notifications and all the navigation.</description>
 
@@ -38,94 +39,94 @@
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>personalization</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>clipboard</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>silverstatistics</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>statistic</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>channels</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>pdc</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>searchengine</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>formtemplate</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>versioning</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>node</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>publication</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>calendar</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>mylinks</artifactId>
       <classifier>client</classifier>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.silverpeas.core.ejb-core</groupId>
       <artifactId>importExport</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -156,7 +157,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>test-core</artifactId>
-      <version>${project.version}</version>
+      <version>${project.parent.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
