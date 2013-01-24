@@ -10,7 +10,7 @@
   <groupId>com.silverpeas.core</groupId>
   <artifactId>lib-core</artifactId>
   <packaging>jar</packaging>
-  <version>5.9.3.1-oosphere-SNAPSHOT</version>
+  <version>5.9.3.1-oosphere</version>
   <name>Lib Core - ${project.version}</name>
   <description>A module providing all the basic services of Silverpeas on which can rely the EJBs and the web parts.</description>
 

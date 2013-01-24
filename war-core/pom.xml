@@ -10,7 +10,7 @@
   <groupId>com.silverpeas.core</groupId>
   <artifactId>war-core</artifactId>
   <packaging>war</packaging>
-  <version>5.9.3.1-oosphere-SNAPSHOT</version>
+  <version>5.9.3.1-oosphere</version>
   <name>Core Webapp - ${project.version}</name>
   <description>The Web GUI for the core elements of Silverpeas : Administration, notifications and all the navigation.</description>
 
