@@ -14,6 +14,21 @@
   <name>Lib Core - ${project.version}</name>
   <description>A module providing all the basic services of Silverpeas on which can rely the EJBs and the web parts.</description>
 
+  <distributionManagement>
+    <repository>
+      <id>oosphere-releases</id>
+      <name>Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>oosphere-snapshots</id>
+      <name>Snapshots Repository OOsphere</name>
+      <layout>default</layout>
+      <url>http://sd-23402.dedibox.fr:8081/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <dependencies>
     <dependency>
       <groupId>xerces</groupId>
