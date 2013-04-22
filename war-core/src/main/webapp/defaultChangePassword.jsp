@@ -23,26 +23,27 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 --%>
-
 <%@page import="com.silverpeas.authentication.AuthenticationService"%>
+<%@page import="com.stratelia.webactiv.util.viewGenerator.html.GraphicElementFactory"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%@page import="com.stratelia.webactiv.beans.admin.UserDetail"%>
 <%@page import="com.silverpeas.jobDomainPeas.JobDomainSettings"%>
+<%@page import="com.stratelia.silverpeas.peasCore.MainSessionController"%>
 <%@ include file="headLog.jsp"%>
 
 <%
-	int minLengthPassword = JobDomainSettings.m_MinLengthPwd;
-	ResourceLocator authenticationBundle = new ResourceLocator("com.silverpeas.authentication.multilang.authentication", "");
-    UserDetail userDetail = (UserDetail)request.getAttribute("userDetail");
-    AuthenticationService authenticationService = new AuthenticationService();
+int minLengthPassword = JobDomainSettings.m_MinLengthPwd;
+ResourceLocator authenticationBundle = new ResourceLocator("com.silverpeas.authentication.multilang.authentication", "");
+AuthenticationService authenticationService = new AuthenticationService();
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title><%=generalMultilang.getString("GML.popupTitle")%></title>
+		<link REL="SHORTCUT ICON" HREF="<%=request.getContextPath()%>/util/icons/favicon.ico">
 		<link type="text/css" href="/silverpeas/util/styleSheets/jquery/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet"/>
 		<link type="text/css" rel="stylesheet" href="<%=styleSheet%>" />
 		<!--[if lt IE 8]>
@@ -64,27 +65,27 @@
 		<script type="text/javascript" src="<%=m_context%>/passwordValidator.js"></script>
 		<script type="text/javascript" src="/silverpeas/util/javaScript/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="/silverpeas/util/javaScript/jquery/jquery-ui-1.8.16.custom.min.js"></script>
-
 	    <script type="text/javascript">
 
 		function checkPassword() {
 			var form = document.getElementById("changePwdForm");
-			var newPassword = form.password.value;
+			var newPassword = form.newPassword.value;
 			var passed = validatePassword(newPassword, {
-				length:   [<%=minLengthPassword%>, Infinity],
+				length:   [4, Infinity],
 				combined: 0
 			});
 	    	if (newPassword != form.confirmPassword.value) {
 	    		alert("<%=authenticationBundle.getString("authentication.password.different") %>");
+		    	return false;
 	    	}
 	    	else if (passed == false) {
-		    	alert("<%=authenticationBundle.getStringWithParam("authentication.password.length.alert", Integer.toString(minLengthPassword)) %>");
+		    	alert("Votre mot de passe doit comporter au moins huit caractères et être composé d'une combinaison de trois types de caractères (à choisir entre minuscules, majuscules, chiffres et signes spéciaux). ");
+		    	return false;
 	    	}
 	    	else {
-	    		form.submit();
+			    form.submit();
 	    	}
 	    }
-
 
 		$(document).ready(function(){
 		      $("#passwordPoliciesModalDialog").dialog({
@@ -103,35 +104,44 @@
 		function showRules() {
 			$("#passwordPoliciesModalDialog").dialog("open");
 		}
-
 	    </script>
 	</head>
 
-	<body>
+<body>
 	  <div id="passwordPoliciesModalDialog" style="display: none">
 		<%=authenticationService.getPasswordPoliciesInfo(request)%>
 	  </div>
-      <form id="changePwdForm" action="<%=m_context%>/CredentialsServlet/ChangePassword" method="post">
-        <div id="top"></div> <!-- Backgroud foncé -->
+	<form id="changePwdForm" action="<%=m_context%>/CredentialsServlet/ChangePasswordFromLogin" method="post">
+        <div id="top"></div> <!-- Background foncé -->
         <div class="page"> <!-- Centrage horizontal des éléments (960px) -->
             <div class="titre"><%=authenticationBundle.getString("authentication.logon.title") %></div>
-            <div id="background"> <!-- image de fond du formulaire -->
+            <div id="backgroundBig"> <!-- image de fond du formulaire -->
                 <div class="cadre">
                     <div id="header">
                         <img src="<%=logo%>" class="logo" />
-                        <p class="information"><%=authenticationBundle.getString("authentication.password.init") %></p>
+                        <p class="information"><%=authenticationBundle.getString("authentication.password.change") %><br/>
+								<%
+									String message = (String) request.getAttribute("message");
+									if (message != null) {
+								%>
+									( <%=message%> )<br/>
+								<%
+									}
+								%></p>
                         <div class="clear"></div>
                     </div>
-					<p><label><span><%=authenticationBundle.getString("authentication.password.new") %> <%=authenticationBundle.getStringWithParam("authentication.password.length", Integer.toString(minLengthPassword)) %></span><input type="password" name="password" id="password"/></label></p>
+					<p><label><span><%=authenticationBundle.getString("authentication.password.old") %></span><input type="password" name="oldPassword" id="oldPassword"/></label></p>
+					<p><label><span><%=authenticationBundle.getString("authentication.password.new") %> <%=authenticationBundle.getStringWithParam("authentication.password.length", Integer.toString(minLengthPassword)) %></span><input type="password" name="newPassword" id="newPassword"/></label></p>
 					<p><label><span><%=authenticationBundle.getString("authentication.password.confirm") %></span><input type="password" name="confirmPassword" id="confirmPassword"/></label></p>
+                    <input type="hidden" name="login" value="${param.Login}" />
+                    <input type="hidden" name="domainId" value="${param.DomainId}" />
 					<br/>
-					<p><a href="#" class="submit" onclick="checkPassword();"><img src="../images/bt-ok.png" /></a></p>
+					<p><input type="submit" style="width:0; height:0; border:0; padding:0"/><a href="#" class="<%=submitClass%>" onclick="checkPassword();"><img src='<c:url value="/images/bt-login.png" />' alt="login"/></a></p>
 					<p><span class="passwordRules"><a href="javascript:showRules()"><%=authenticationBundle.getString("authentication.password.showRules") %></a></span></p>
                 </div>
             </div>
-            <input type="hidden" name="Login" value="<%=userDetail.getLogin()%>"/>
-	    	<input type="hidden" name="DomainId" value="<%=userDetail.getDomainId()%>"/>
         </div>
       </form>
+
 	</body>
 </html>

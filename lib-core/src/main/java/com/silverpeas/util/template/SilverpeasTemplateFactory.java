@@ -26,16 +26,39 @@ package com.silverpeas.util.template;
 
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SilverpeasTemplateFactory {
+
+  private static final String separator = "/";
 
   public static SilverpeasTemplate createSilverpeasTemplate(Properties configuration) {
     return new SilverpeasStringTemplate(configuration);
   }
-  
+
   public static SilverpeasTemplate createSilverpeasTemplateOnComponents() {
     Properties config = new Properties();
     config.setProperty(SilverpeasTemplate.TEMPLATE_ROOT_DIR, SilverpeasStringTemplateUtil.defaultComponentsDir);
     config.setProperty(SilverpeasTemplate.TEMPLATE_CUSTOM_DIR, SilverpeasStringTemplateUtil.customComponentsDir);
     return new SilverpeasStringTemplate(config);
+  }
+
+  public static SilverpeasTemplate createSilverpeasTemplateOnCore(final String pathSuffix) {
+    final Properties config = new Properties();
+    config.setProperty(SilverpeasTemplate.TEMPLATE_ROOT_DIR,
+        computePath(SilverpeasStringTemplateUtil.defaultCoreDir, pathSuffix));
+    config.setProperty(SilverpeasTemplate.TEMPLATE_CUSTOM_DIR,
+        computePath(SilverpeasStringTemplateUtil.customCoreDir, pathSuffix));
+    return createSilverpeasTemplate(config);
+  }
+
+  private static String computePath(final String pathBase, final String pathSuffix) {
+    final StringBuffer sb = new StringBuffer(pathBase);
+    if (StringUtils.isNotBlank(pathSuffix)) {
+      sb.append(separator);
+      sb.append(pathSuffix);
+      sb.append(separator);
+    }
+    return sb.toString().replaceAll("[/]{1,}", "/");
   }
 }
