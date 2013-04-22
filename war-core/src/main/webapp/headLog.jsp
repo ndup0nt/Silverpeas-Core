@@ -54,9 +54,12 @@ String logo = general.getString("logo", m_context+"/images/logo.jpg");
 String styleSheet = general.getString("defaultLoginStyleSheet", m_context+"/style.css");
 
 // Is "forgotten password" feature active ?
-String pwdResetBehavior = general.getString("forgottenPwdActive", "reinit");    
+String pwdResetBehavior = general.getString("forgottenPwdActive", "reinit");
 boolean forgottenPwdActive = !"false".equalsIgnoreCase(pwdResetBehavior);
+boolean changePwdFromLoginPageActive = authenticationSettings.getBoolean("changePwdFromLoginPageActive", false);
 boolean rememberPwdActive = authenticationSettings.getBoolean("cookieEnabled", false);
+String changePasswordFromLoginPage = general.getString("changePasswordFromLoginPage", "/defaultChangePassword.jsp");
+pageContext.setAttribute("changePasswordFromLoginPage", changePasswordFromLoginPage);
 
 // Get a LoginPasswordAuthentication object
 LoginPasswordAuthentication lpAuth = new LoginPasswordAuthentication();

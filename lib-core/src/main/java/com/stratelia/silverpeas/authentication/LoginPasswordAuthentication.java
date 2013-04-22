@@ -80,6 +80,7 @@ public class LoginPasswordAuthentication {
 
   static protected int m_AutoInc = 1;
   public static final String ERROR_PWD_EXPIRED = "Error_PwdExpired";
+  public static final String ERROR_PWD_MUST_BE_CHANGED = "Error_PwdMustBeChanged";
 
   static {
     ResourceLocator propFile = new ResourceLocator(
@@ -242,6 +243,8 @@ public class LoginPasswordAuthentication {
         errorCause = "Error_5";
       } else if (ex instanceof AuthenticationPasswordExpired) {
         errorCause = ERROR_PWD_EXPIRED;
+      } else if (ex instanceof AuthenticationPasswordMustBeChangedAtNextLogon) {
+        errorCause = ERROR_PWD_MUST_BE_CHANGED;
       }
       return errorCause;
     } finally {
@@ -332,7 +335,7 @@ public class LoginPasswordAuthentication {
       m_Connection = openConnection();
 
       AuthenticationServer authenticationServer = getAuthenticationServer(m_Connection, domainId);
-      
+
       // Authentification test
       authenticationServer.changePassword(login, oldPassword, newPassword);
     } catch (AuthenticationException ex) {
@@ -451,7 +454,7 @@ public class LoginPasswordAuthentication {
 
       // Build a AuthenticationServer instance
       AuthenticationServer authenticationServer = getAuthenticationServer(connection, domainId);
-      
+
       // Authentification test
       authenticationServer.resetPassword(login, newPassword);
     } catch (AuthenticationException ex) {
@@ -482,7 +485,7 @@ public class LoginPasswordAuthentication {
     }
     return false;
   }
-  
+
   private AuthenticationServer getAuthenticationServer(Connection con, String domainId)
       throws AuthenticationException {
     // Get authentication server name

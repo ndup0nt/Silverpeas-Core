@@ -9,7 +9,7 @@
 
   <groupId>com.silverpeas.core</groupId>
   <artifactId>war-core</artifactId>
-  <version>5.9.2-msad-expire</version>
+  <version>5.9.2.1-msad-expire</version>
   <packaging>war</packaging>
   <name>Core Webapp - ${project.version}</name>
   <description>The Web GUI for the core elements of Silverpeas : Administration, notifications and all the navigation.</description>

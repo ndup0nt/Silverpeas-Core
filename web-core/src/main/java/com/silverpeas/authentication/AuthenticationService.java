@@ -24,6 +24,8 @@
 package com.silverpeas.authentication;
 
 import com.silverpeas.util.StringUtil;
+import com.silverpeas.util.template.SilverpeasTemplate;
+import com.silverpeas.util.template.SilverpeasTemplateFactory;
 import com.stratelia.silverpeas.authentication.Authentication;
 import com.stratelia.silverpeas.notificationManager.NotificationManagerException;
 import com.stratelia.silverpeas.notificationManager.NotificationMetaData;
@@ -44,7 +46,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
 /**
- * Service used for user authentication : creating all the required ressources for Silverpeas 
+ * Service used for user authentication : creating all the required ressources for Silverpeas
  * in the Session.
  * @author ehugonnet
  */
@@ -54,7 +56,7 @@ public class AuthenticationService {
 
   public AuthenticationService() {
   }
-  
+
   public boolean isAnonymousUser(HttpServletRequest request) {
      HttpSession session = request.getSession();
      MainSessionController controller = (MainSessionController) session.getAttribute(
@@ -164,7 +166,7 @@ public class AuthenticationService {
       absoluteUrl.append(URLManager.getURL(sDirectAccessSpace, sDirectAccessCompo)).append("Main");
     } else {
       absoluteUrl.append("/Main/").append(favoriteFrame);
-    }    
+    }
     return absoluteUrl.toString();
   }
 
@@ -216,14 +218,14 @@ public class AuthenticationService {
     ResourceLocator messages = new ResourceLocator(
             "com.stratelia.silverpeas.peasCore.multilang.peasCoreBundle", language);
     NotificationSender sender = new NotificationSender(null);
-    NotificationMetaData notifMetaData = new NotificationMetaData(NotificationParameters.NORMAL, 
+    NotificationMetaData notifMetaData = new NotificationMetaData(NotificationParameters.NORMAL,
             messages.getString("passwordExpirationAlert"), messages.getString("passwordExpirationMessage"));
     notifMetaData.setSender(fromUserId);
     notifMetaData.addUserRecipient(new UserRecipient(userId));
     sender.notifyUser(NotificationParameters.ADDRESS_BASIC_POPUP, notifMetaData);
   }
-  
-  
+
+
   public void unauthenticate(HttpServletRequest request) {
     HttpSession session = request.getSession();
     session.removeAttribute(MainSessionController.MAIN_SESSION_CONTROLLER_ATT);
@@ -237,4 +239,23 @@ public class AuthenticationService {
     }
     SessionManager.getInstance().removeSession(session);
   }
+
+  public String getPasswordPoliciesInfo(HttpServletRequest request) {
+    HttpSession session = request.getSession(true);
+    MainSessionController controller = (MainSessionController) session.getAttribute(MainSessionController.MAIN_SESSION_CONTROLLER_ATT);
+
+    // Get user's favorite language if user is logged, or language defined in browser
+    String language = null;
+    if (controller == null) {
+      language = request.getLocale().getLanguage();
+    }
+    else {
+      language = controller.getFavoriteLanguage();
+    }
+
+    // load template
+    SilverpeasTemplate template = SilverpeasTemplateFactory.createSilverpeasTemplateOnCore("authentication");
+    return template.applyFileTemplate("passwordPolicies_"+language);
+  }
+
 }
