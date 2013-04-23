@@ -126,7 +126,6 @@ AuthenticationService authenticationService = new AuthenticationService();
 
     if ("personalQuestion".equals(general.getString("forgottenPwdActive"))) {
         String userLoginQuestion = userFull.getLoginQuestion();
-        String userLoginAnswer = userFull.getLoginAnswer();
 %>
         <tr id="question">
             <td class="txtlibform"><%=resource.getString("myProfile.LoginQuestion")%> :</td>
@@ -155,7 +154,7 @@ AuthenticationService authenticationService = new AuthenticationService();
 		String[] properties = userFull.getPropertiesNames();
 		String propertyName = null;
 		for (int p=0; p<properties.length; p++) {
-			propertyName = (String) properties[p];
+			propertyName = properties[p];
 			DomainProperty property=userFull.getProperty(propertyName);
 
 			if (!propertyName.startsWith("password")) {
@@ -202,15 +201,15 @@ AuthenticationService authenticationService = new AuthenticationService();
 		<% if (isPasswordChangeAllowed) {%>
 		if (document.UserForm.NewPassword.value != document.UserForm.NewPasswordConfirm.value)
 		{
-			errorMsg += "- <%=resource.getString("WrongNewPwd")%>\n";
+			errorMsg += "- <%=resource.getString("myProfile.WrongNewPwd")%>\n";
 		}
 		if (<%=! blanksAllowedInPwd.booleanValue()%> && document.UserForm.NewPassword.value.indexOf(" ") != -1)
 		{
-			errorMsg += "- <%=resource.getString("NoSpacesInPassword")%>\n";
+			errorMsg += "- <%=resource.getString("myProfile.NoSpacesInPassword")%>\n";
 		}
 		else if ((document.UserForm.NewPassword.value.length > 0) &&
 				(document.UserForm.NewPassword.value.length < <%=minLengthPwd.intValue()%>))
-			errorMsg += "- <%=resource.getString("WrongLength")%>\n";
+			errorMsg += "- <%=resource.getString("myProfile.WrongLength")%>\n";
 		<%
 		}
 		%>

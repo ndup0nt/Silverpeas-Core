@@ -5861,6 +5861,8 @@ public final class Admin {
             bFound = true;
             distantUD.setId(silverpeasUDs[nJ].getId());
             distantUD.setAccessLevel(silverpeasUDs[nJ].getAccessLevel());
+            distantUD.setLoginQuestion(silverpeasUDs[nJ].getLoginQuestion());
+            distantUD.setLoginAnswer(silverpeasUDs[nJ].getLoginAnswer());
           }
         }
 
