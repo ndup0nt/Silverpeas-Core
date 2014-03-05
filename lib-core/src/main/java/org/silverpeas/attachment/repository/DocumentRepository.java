@@ -646,7 +646,7 @@ public class DocumentRepository {
    *
    * @param session the current JCR session.
    * @param instanceId the component id containing the documents.
-   * @param foreignId the id of the container owning the documents.
+   * @param type the type of document.
    * @return an ordered list of the documents.
    * @throws RepositoryException
    */
@@ -698,7 +698,7 @@ public class DocumentRepository {
   }
 
   /**
-   * Search all the documents in an instance expirying at the specified date.
+   * Search all the documents in an instance expiring at the specified date.
    *
    * @param session the current JCR session.
    * @param expiryDate the date when the document reservation should expire.
