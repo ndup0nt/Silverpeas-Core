@@ -45,7 +45,7 @@
     <connection>scm:git:git@github.com:ndup0nt/Silverpeas-Core.git</connection>
     <developerConnection>scm:git:git@github.com:ndup0nt/Silverpeas-Core.git</developerConnection>
     <url>http://github.com/ndup0nt/Silverpeas-Core</url>
-    <tag>core-aim-5.13</tag>
+    <tag>core-aim-5.13.4</tag>
   </scm>
 
   <distributionManagement>
@@ -90,7 +90,7 @@
 
   <groupId>com.silverpeas</groupId>
   <artifactId>core</artifactId>
-  <version>aim-5.13.4-SNAPSHOT</version>
+  <version>aim-5.13.4</version>
   <packaging>pom</packaging>
   <name>Silverpeas Core</name>
 
